@@ -15,10 +15,11 @@ export default {
     components: {
       Country,
     },
-  props: ["info"],
+  props: ["countries"],
   computed: {
     topTenCountries: function() {
-      return _.orderBy(this.info, 'TotalConfirmed', 'desc').slice(0, 10)
+      // sort countries by TotalConfirmed cases and return top 10
+      return _.orderBy(this.countries, 'TotalConfirmed', 'desc').slice(0, 10)
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div id="app" role="main">
     <Header />
-    <Countries :info='info' />
+    <Countries :countries='countries' />
   </div>
 </template>
 
@@ -18,13 +18,14 @@ export default {
   },
   data() {
     return {
-      info: [],
+      countries: [],
     }
   },
   mounted() {
+    // get all data from api
     axios
       .get('https://api.covid19api.com/summary')
-      .then(response => (this.info = response.data.Countries))
+      .then(response => (this.countries = response.data.Countries))
   }
 }
 </script>
