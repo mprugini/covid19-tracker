@@ -1,17 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" role="main">
+    <Header />
+    <Countries :info='info' />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header'
+import Countries from './components/Countries'
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Countries
+  },
+  data() {
+    return {
+      info: [],
+    }
+  },
+  mounted() {
+    axios
+      .get('https://api.covid19api.com/summary')
+      .then(response => (this.info = response.data.Countries))
   }
 }
 </script>
@@ -19,10 +32,7 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  text-align: center;
 }
 </style>

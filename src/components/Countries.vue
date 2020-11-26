@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <Country
+      v-for="country in topTenCountries"
+      :key="country.Slug"
+      :country="country"
+    ></Country>
+  </div>
+</template>
+
+<script>
+import Country from "./Country";
+import _ from 'lodash';
+export default {
+    components: {
+      Country,
+    },
+  props: ["info"],
+  computed: {
+    topTenCountries: function() {
+      return _.orderBy(this.info, 'TotalConfirmed', 'desc').slice(0, 10)
+    },
+  },
+};
+</script>
+
+<style></style>
